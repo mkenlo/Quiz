@@ -1,0 +1,79 @@
+[
+  {
+    "id":1,
+    "name":"What is the world ancient civilisation?",
+    "buttonType":"TextView",
+    "options":[],
+    "solution":["Africa"]
+
+  },
+  {
+    "id":2,
+    "name":"How many countries in AFRICA?",
+    "buttonType":"RadioButton",
+    "options":["54", "32", "72"],
+    "solution":["54"]
+
+  },
+  {
+    "id":3,
+    "name":"How many natives languages in AFRICA?",
+    "buttonType":"RadioButton",
+    "options":["Less than 500", "Just 1000", "Over 1500"],
+    "solution":["Over 1500"]
+
+  },
+  {
+    "id":4,
+    "name":"What official languages are spoken in AFRICA?",
+    "buttonType":"CheckBox",
+    "options":["Hindi", "French", "Portuguese" ],
+    "solution":[ "French", "Portuguese"]
+  },
+  {
+    "id":5,
+    "name":"What is the most popular tourist destination in AFRICA?",
+    "buttonType":"RadioButton",
+    "options":["South Africa","Kenya", "Egypt"],
+    "solution":["Egypt"]
+
+  },
+  {
+    "id":6,
+    "name":"What is the most populated country in AFRICA?",
+    "buttonType":"RadioButton",
+    "options":["Sudan","Ghana", "Nigeria"],
+    "solution":["Nigeria"]
+
+  },
+  {
+    "id":7,
+    "name":"What is the largest country in AFRICA?",
+    "buttonType":"RadioButton",
+    "options":["Sudan","South Africa", "Nigeria"],
+    "solution":["Sudan"]
+
+  },
+  {
+    "id":8,
+    "name":"What is the smallest country in Africa?",
+    "buttonType":"RadioButton",
+    "options":["Seychelles","Djibouti", "Comores"],
+    "solution":["Seychelles"]
+  },
+  {
+    "id":9,
+    "name":"Which countries where not colonised?",
+    "buttonType":"CheckBox",
+    "options":["Ethiopia","Mauritus", "Liberia"],
+    "solution":["Ethiopia","Liberia"]
+  },
+  {
+    "id":10,
+    "name":"What is the longuest River in AFRICA?",
+    "buttonType":"RadioButton",
+    "options":["Nile","Congo", "Sanaga"],
+    "solution":["Nile"]
+  }
+
+]
