@@ -1,7 +1,7 @@
 [
   {
     "id":1,
-    "name":"What is the world ancient civilisation?",
+    "name":"I am the second largest continent in size, Who I am?",
     "buttonType":"TextView",
     "options":[],
     "solution":["Africa"]
@@ -65,7 +65,7 @@
     "id":9,
     "name":"Which countries where not colonised?",
     "buttonType":"CheckBox",
-    "options":["Ethiopia","Mauritus", "Liberia"],
+    "options":["Ethiopia","Mauritius", "Liberia"],
     "solution":["Ethiopia","Liberia"]
   },
   {

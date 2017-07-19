@@ -6,7 +6,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +28,9 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static com.mkenlo.quiz.R.id.question;
 import static com.mkenlo.quiz.R.raw.questions;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     EditText editable;
     int score = 0;
     int currentQuestionId = 1;
+    int numOfSolutions;
+    List<String> checkSolution;
 
 
     @Override
@@ -53,17 +59,44 @@ public class MainActivity extends AppCompatActivity {
     public void displayQuestion(final Context context) {
 
         final Question oneQuestion = quiz.get(currentQuestionId - 1);
-        questionTextview = (TextView) findViewById(R.id.question);
+        final List solution = Arrays.asList(oneQuestion.getSolution());
+        questionTextview = (TextView) findViewById(question);
         questionTextview.setText(oneQuestion.getName());
 
         RadioGroup optionGroup = (RadioGroup) findViewById(R.id.optionGroup);
         optionGroup.removeAllViews();
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
         switch (oneQuestion.getButtonType()) {
             case "TextView":
                 editable = new EditText(context);
                 editable.setLayoutParams(params);
                 editable.setLines(1);
+                editable.setEms(10);
+                editable.setInputType(TYPE_CLASS_TEXT);
+                editable.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        if(editable.length()>0 && editable.toString().equalsIgnoreCase(oneQuestion.getSolution()[0])){
+                            updateScore();
+                            Toast.makeText(context, oneQuestion.getSolution()[0], Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            showFace("angry");
+                        }
+
+                    }
+                });
                 optionGroup.addView(editable);
                 break;
             case "RadioButton":
@@ -77,14 +110,16 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             if (option.equalsIgnoreCase(oneQuestion.getSolution()[0])) {
                                 updateScore();
-                                Toast.makeText(context, oneQuestion.getSolution()[0], Toast.LENGTH_LONG).show();
-                            } else showFace("angry");
+                                Toast.makeText(context, oneQuestion.getSolution()[0], Toast.LENGTH_SHORT).show();
+                            } else  showFace("angry");
                         }
                     });
                     optionGroup.addView(radioButton);
                 }
                 break;
             case "CheckBox":
+               numOfSolutions= oneQuestion.getSolution().length;
+                checkSolution = new ArrayList<String>();
                 for (final String option : oneQuestion.getOptions()) {
                     checkBox = new CheckBox(context);
                     checkBox.setText(option);
@@ -93,8 +128,18 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onClick(View view) {
-                            if (option.equalsIgnoreCase(oneQuestion.getSolution()[0])) {
+
+                            if(((CheckBox) view).isChecked() && solution.contains(option)){
+                                checkSolution.add(option);
+                            }
+                            if(((CheckBox) view).isChecked() && !solution.contains(option)){
+                                showFace("angry");
+                                ((CheckBox) view).setChecked(false);
+                            }
+                            if(checkSolution.size()== solution.size()){
                                 updateScore();
+                                Toast.makeText(context, solution.toString(), Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
@@ -120,32 +165,14 @@ public class MainActivity extends AppCompatActivity {
             displayQuestion(getBaseContext());
         } else {
             Button but = (Button) findViewById(R.id.nextButton);
-            but.setActivated(false);
+           // but.setText("Restart");
             currentQuestionId = quiz.size();
         }
         displayProgress();
         showFace("neutral");
     }
 
-    public void getPreviousQuestion(View v) {
 
-        currentQuestionId--;
-        if (currentQuestionId > 0) {
-            displayQuestion(getBaseContext());
-        } else {
-            Button but = (Button) findViewById(R.id.prevButton);
-            but.setActivated(false);
-            currentQuestionId = 0;
-        }
-        displayProgress();
-        showFace("neutral");
-    }
-
-    public void verifyQuestion(View v){
-        RadioGroup optionGroup = (RadioGroup) findViewById(R.id.optionGroup);
-        int test = optionGroup.getCheckedRadioButtonId();
-        Log.d("VERIFY-QUESTION", String.valueOf(test));
-    }
 
     private String loadJSONFromAsset() {
         String json;
@@ -154,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
             InputStream is = getResources().openRawResource(questions);
             int size = is.available();
             byte[] buffer = new byte[size];
+            is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
 

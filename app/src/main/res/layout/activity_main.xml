@@ -77,24 +77,12 @@
 
     </RadioGroup>
 
-    <android.support.v7.widget.ButtonBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
 
-        <Button
-            android:id="@+id/prevButton"
-            style="@style/ButtonElement"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:background="@color/colorPrimary"
-            android:onClick="verifyQuestion"
-            android:text="Verify" />
+    <Button
+        android:id="@+id/nextButton"
+        style="@style/ButtonElement"
+        android:background="@color/colorAccent"
+        android:onClick="getNextQuestion"
+        android:text="Next" />
 
-        <Button
-            android:id="@+id/nextButton"
-            style="@style/ButtonElement"
-            android:background="@color/colorAccent"
-            android:onClick="getNextQuestion"
-            android:text="Next" />
-    </android.support.v7.widget.ButtonBarLayout>
 </LinearLayout>
