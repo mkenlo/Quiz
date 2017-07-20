@@ -1,88 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_medium"
+    android:paddingLeft="@dimen/spacing_small"
+    android:paddingRight="@dimen/spacing_small"
     tools:context="com.mkenlo.quiz.MainActivity">
-
-    <TextView
-        android:id="@+id/progressText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@string/font_family_light"
-        android:text="1/10" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="10" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:orientation="horizontal"
-        android:padding="@dimen/spacing_small">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/quizContainer">
         <TextView
+            android:id="@+id/progressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Score: "
+            android:fontFamily="@string/font_family_light"
+            android:text="1/10" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Score: "
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:textSize="@dimen/text_medium" />
+
+            <ImageView
+                android:id="@+id/resultImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_neutral" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:background="@color/colorAccent" />
+
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/spacing_small"
+            android:text="Question Here"
             android:textSize="@dimen/text_medium"
-            android:textStyle="bold" />
+            android:layout_marginBottom="@dimen/spacing_large"/>
 
-        <TextView
-            android:id="@+id/score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
-            android:textSize="@dimen/text_medium" />
+        <RadioGroup
+            android:id="@+id/optionGroup"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_medium">
 
-        <ImageView
-            android:id="@+id/resultImage"
-            android:layout_width="wrap_content"
+        </RadioGroup>
+
+
+        <android.support.v7.widget.ButtonBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_neutral" />
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/nextButton"
+                style="@style/ButtonElement"
+                android:background="@color/colorAccent"
+                android:onClick="getNextQuestion"
+                android:text="Next" />
+
+        </android.support.v7.widget.ButtonBarLayout>
+
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="@dimen/spacing_medium"
-        android:background="@color/colorAccent" />
-
-
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:gravity="center_horizontal"
-        android:paddingTop="@dimen/spacing_small"
-        android:text="Question Here"
-        android:textSize="@dimen/text_medium" />
-
-    <RadioGroup
-        android:id="@+id/optionGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3">
-
-    </RadioGroup>
-
-
-    <Button
-        android:id="@+id/nextButton"
-        style="@style/ButtonElement"
-        android:background="@color/colorAccent"
-        android:onClick="getNextQuestion"
-        android:text="Next" />
-
-</LinearLayout>
+</ScrollView>

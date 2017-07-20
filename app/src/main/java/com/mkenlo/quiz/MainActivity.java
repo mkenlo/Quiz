@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -31,6 +33,7 @@ import com.google.gson.Gson;
 
 import static android.text.InputType.TYPE_CLASS_TEXT;
 import static com.mkenlo.quiz.R.id.question;
+import static com.mkenlo.quiz.R.id.up;
 import static com.mkenlo.quiz.R.raw.questions;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
         RadioGroup optionGroup = (RadioGroup) findViewById(R.id.optionGroup);
         optionGroup.removeAllViews();
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0,0,0,16);
 
         switch (oneQuestion.getButtonType()) {
             case "TextView":
@@ -160,19 +164,46 @@ public class MainActivity extends AppCompatActivity {
 
     public void getNextQuestion(View v) {
 
+        Button nextButton = (Button) v;
+        if (nextButton.getText().equals("restart")){
+            nextButton.setText("next");
+            // reset score
+            score = 0;
+            updateScore();
+        }
+
         currentQuestionId++;
         if (currentQuestionId <= quiz.size()) {
             displayQuestion(getBaseContext());
         } else {
-            Button but = (Button) findViewById(R.id.nextButton);
-           // but.setText("Restart");
-            currentQuestionId = quiz.size();
+            currentQuestionId =0;
+            quizSummary();
         }
         displayProgress();
         showFace("neutral");
     }
 
+    public void quizSummary(){
 
+        RadioGroup rg = (RadioGroup) findViewById(R.id.optionGroup);
+        rg.removeAllViews();
+
+        questionTextview.setText("");
+        TextView finalScore = new TextView(getApplicationContext());
+        finalScore.setText("You scored " +String.valueOf(score)+"/10");
+        finalScore.setTextSize(48);
+        finalScore.setGravity(1);
+        rg.addView(finalScore);
+
+        if( score <= 4){
+            showFace("angry");
+        }
+        else  showFace("happy");
+
+        Button bt = (Button) findViewById(R.id.nextButton);
+        bt.setText("restart");
+
+    }
 
     private String loadJSONFromAsset() {
         String json;
