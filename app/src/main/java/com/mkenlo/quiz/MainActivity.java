@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         finalScore.setTextSize(48);
         finalScore.setGravity(1);
         rg.addView(finalScore);
-
+        Toast.makeText(getApplicationContext(), "You scored " +String.valueOf(score)+"/10", Toast.LENGTH_SHORT).show();
         if( score <= 4){
             showFace("angry");
         }
