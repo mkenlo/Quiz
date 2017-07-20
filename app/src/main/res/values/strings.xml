@@ -9,7 +9,8 @@
     <string name="font_family_black">sans-serif-black</string>
     <string name="font_family_thin">sans-serif-thin</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scoreText">Score :</string>
+    <string name="nextButton">Next</string>
+    <string name="progressText">1/10</string>
 
 </resources>

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/quizContainer">
         <TextView
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@string/font_family_light"
-            android:text="1/10" />
+            android:text="@string/progressText" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="10" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Score: "
+                android:text="@string/scoreText"
                 android:textSize="@dimen/text_medium"
                 android:textStyle="bold" />
 
@@ -48,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
+                android:paddingLeft="@dimen/spacing_small"
                 android:textSize="@dimen/text_medium" />
 
             <ImageView
@@ -63,7 +63,6 @@
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:background="@color/colorAccent" />
-
 
         <TextView
             android:id="@+id/question"
@@ -84,7 +83,6 @@
 
         </RadioGroup>
 
-
         <android.support.v7.widget.ButtonBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,10 +93,9 @@
                 style="@style/ButtonElement"
                 android:background="@color/colorAccent"
                 android:onClick="getNextQuestion"
-                android:text="Next" />
+                android:text="@string/nextButton" />
 
         </android.support.v7.widget.ButtonBarLayout>
-
 
     </LinearLayout>
 
