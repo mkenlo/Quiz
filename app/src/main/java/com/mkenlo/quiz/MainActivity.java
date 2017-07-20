@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                             if (option.equalsIgnoreCase(oneQuestion.getSolution()[0])) {
                                 updateScore();
                                 Toast.makeText(context, oneQuestion.getSolution()[0], Toast.LENGTH_SHORT).show();
+                                ((RadioButton) view).setEnabled(false);
                             } else  showFace("angry");
                         }
                     });
@@ -135,12 +136,13 @@ public class MainActivity extends AppCompatActivity {
 
                             if(((CheckBox) view).isChecked() && solution.contains(option)){
                                 checkSolution.add(option);
+                                ((CheckBox) view).setChecked(true);
                             }
                             if(((CheckBox) view).isChecked() && !solution.contains(option)){
                                 showFace("angry");
                                 ((CheckBox) view).setChecked(false);
                             }
-                            if(checkSolution.size()== solution.size()){
+                            if(((CheckBox) view).isChecked() && checkSolution.size()== solution.size()){
                                 updateScore();
                                 Toast.makeText(context, solution.toString(), Toast.LENGTH_SHORT).show();
 
